@@ -5,8 +5,8 @@ define("HOST_NAME", "Poitech Mailer");
 define("HOST_EMAIL", "poitech@mail.com");
 
 // Define SMTP Credentials || Gmail Informations
-define("SMTP_EMAIL", "mail@gmail.com");
-define("SMTP_PASSWORD", "your_gmail_pass"); // read documentations
+define("SMTP_EMAIL", "info@dalyzcounseling.com");
+define("SMTP_PASSWORD", "bbxfovragipkdclf"); // read documentations
 
 
 // Define Recipent Info ||  Who will get this email?
