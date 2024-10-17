@@ -7968,7 +7968,7 @@ ul {
 .about-three__img-2 {
   position: absolute;
   bottom: -97px;
-  left: -130px;
+  left: -100px;
   border-radius: var(--delogis-bdr-radius);
   background-color: rgb(26, 20, 20);
   z-index: 1;
