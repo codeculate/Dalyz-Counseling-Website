@@ -16046,7 +16046,12 @@ body.boxed-wrapper {
     margin-top: 10px;
   }
   .about-three__img-2 {
-    display: none;
+    position: absolute;
+    bottom: -97px;
+    right: 0px;
+    border-radius: var(--delogis-bdr-radius);
+    background-color: rgb(26, 20, 20);
+    z-index: 1;
   }
   .about-three__right {
     margin-top: 60px;
