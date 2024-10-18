@@ -1,8 +1,8 @@
 <?php
 
 // Define Host Info || Who is sending emails?
-define("HOST_NAME", "Poitech Mailer");
-define("HOST_EMAIL", "poitech@mail.com");
+define("HOST_NAME", "Dalyz Consultancy");
+define("HOST_EMAIL", "dalyzconsultancy@gmail.com");
 
 // Define SMTP Credentials || Gmail Informations
 define("SMTP_EMAIL", "dalyzconsultancy@gmail.com");
