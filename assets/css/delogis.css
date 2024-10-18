@@ -16277,6 +16277,9 @@ body.boxed-wrapper {
   .banner-one {
     padding: 45px 20px 50px;
   }
+  .services-three__bg-box {
+    height: 680px;
+  }
   .services-details__process {
     flex-direction: column;
   }
