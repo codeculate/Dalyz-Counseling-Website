@@ -5,13 +5,13 @@ define("HOST_NAME", "Poitech Mailer");
 define("HOST_EMAIL", "poitech@mail.com");
 
 // Define SMTP Credentials || Gmail Informations
-define("SMTP_EMAIL", "info@dalyzcounseling.com");
-define("SMTP_PASSWORD", "bbxfovragipkdclf"); // read documentations
+define("SMTP_EMAIL", "dalyzconsultancy@gmail.com");
+define("SMTP_PASSWORD", "neWdalyZ101!"); // read documentations
 
 
 // Define Recipent Info ||  Who will get this email?
-define("RECIPIENT_NAME", "Dalyz Counseling");
-define("RECIPIENT_EMAIL", "info@dalyzcounseling.com");
+define("RECIPIENT_NAME", "Dalyz Consultancy");
+define("RECIPIENT_EMAIL", "dalyzconsultancy@gmail.com");
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -33,7 +33,7 @@ try {
 	//Server settings
 	$mail->SMTPDebug = 0;                      //Enable verbose debug output
 	$mail->isSMTP();                                            //Send using SMTP
-	$mail->Host       = 'smtp.dalyzcounseling.com';                     //Set the SMTP server to send through
+	$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
 	$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
 	$mail->Username   = SMTP_EMAIL;                     //SMTP username
 	$mail->Password   = SMTP_PASSWORD;                               //SMTP password
