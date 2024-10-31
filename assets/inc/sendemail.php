@@ -22,11 +22,46 @@ require './PHPMailer/src/Exception.php';
 require './PHPMailer/src/PHPMailer.php';
 require './PHPMailer/src/SMTP.php';
 
+session_start(); // Start the session to track submission time
 
+// Validate the Google reCAPTCHA
+$recaptchaResponse = $_POST['g-recaptcha-response'];
+$secretKey = '6LdGuWcqAAAAACrHYmJyURodajusI9fmuu7Egf_A'; // Your reCAPTCHA secret key
+$recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify';
 
+$response = file_get_contents($recaptchaUrl . '?secret=' . $secretKey . '&response=' . $recaptchaResponse);
+$responseKeys = json_decode($response, true);
 
+if (intval($responseKeys["success"]) !== 1) {
+    echo "<div class='inner error'><p class='error' style="color:red">reCAPTCHA failed, please try again.</p></div>";
+    exit;
+}
 
-// Create an instance; passing `true` enables exceptions
+// Check time-based validation to avoid bots submitting too quickly
+$formStartTime = isset($_POST['form_start_time']) ? (int)$_POST['form_start_time'] : 0;
+$timeNow = time();
+$timeDifference = $timeNow - $formStartTime;
+
+if ($timeDifference < 5) {
+    echo "<div class='inner error'><p class='error' style="color:red">Form submitted too quickly, suspected bot.</p></div>";
+    exit;
+}
+
+// Limit form submission by session (e.g., 1 submission per minute)
+if (isset($_SESSION['last_submission_time']) && $timeNow - $_SESSION['last_submission_time'] < 60) {
+    echo "<div class='inner error'><p class='error' style="color:red">Please wait a minute before submitting again.</p></div>";
+    exit;
+}
+$_SESSION['last_submission_time'] = $timeNow; // Update the last submission time
+
+// Email validation (server-side)
+$senderEmail = isset($_POST['email']) ? $_POST['email'] : '';
+if (!filter_var($senderEmail, FILTER_VALIDATE_EMAIL)) {
+    echo "<div class='inner error'><p class='error' style="color:red">Invalid email format.</p></div>";
+    exit;
+}
+
+// Create an instance of PHPMailer
 $mail = new PHPMailer(true);
 
 try {
@@ -44,16 +79,14 @@ try {
     $mail->setFrom(HOST_EMAIL, HOST_NAME);
     $mail->addAddress(RECIPIENT_EMAIL, RECIPIENT_NAME); // Add a recipient
 
-	// Add Reply-To address based on the form's email
+    // Add Reply-To address based on the form's email
     if ($senderEmail) {
         $mail->addReplyTo($senderEmail, $firstName . ' ' . $lastName);
     }
 
-
     // Content
     $firstName = isset($_POST['F-name']) ? preg_replace("/[^\.\-\' a-zA-Z0-9]/", "", $_POST['F-name']) : "";
     $lastName = isset($_POST['L-name']) ? preg_replace("/[^\.\-\' a-zA-Z0-9]/", "", $_POST['L-name']) : "";
-    $senderEmail = isset($_POST['email']) ? preg_replace("/[^\.\-\_\@a-zA-Z0-9]/", "", $_POST['email']) : "";
     $phone = isset($_POST['Phone']) ? preg_replace("/[^\.\-\_\@a-zA-Z0-9]/", "", $_POST['Phone']) : "";
     $services = isset($_POST['services']) ? preg_replace("/[^\.\-\_\@a-zA-Z0-9]/", "", $_POST['services']) : "";
     $date = isset($_POST['date']) ? preg_replace("/[^\.\-\_\@a-zA-Z0-9]/", "", $_POST['date']) : "";
@@ -73,5 +106,5 @@ try {
     $mail->send();
     echo "<div class='inner success'><p class='success'>Thanks for contacting us. We will contact you ASAP!</p></div><!-- /.inner -->";
 } catch (Exception $e) {
-    echo "<div class='inner error'><p class='error'>Message could not be sent. Mailer Error: {$mail->ErrorInfo}</p></div><!-- /.inner -->";
+    echo "<div class='inner error'><p class='error' style="color:red">Message could not be sent. Mailer Error: {$mail->ErrorInfo}</p></div><!-- /.inner -->";
 }

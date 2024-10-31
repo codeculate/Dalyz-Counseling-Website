@@ -954,7 +954,8 @@
                                 <h2 class="section-title__title">Let’s Book <span>Your</span> <br> Appointment</h2>
                             </div>
                             <div class="make-appointment__form-box">
-                                <form action="assets/inc/sendemail.php" method="POST" class="make-appointment__form contact-form-validated" novalidate="novalidate">
+                                <form action="assets/inc/sendemail.php" method="POST"
+                                    class="make-appointment__form contact-form-validated" novalidate="novalidate">
                                     <div class="row">
                                         <div class="col-xl-6 col-lg-6">
                                             <div class="make-appointment__form-input-box">
@@ -978,17 +979,20 @@
                                         </div>
                                         <div class="col-xl-6 col-lg-6">
                                             <div class="make-appointment__form-input-box">
-                                                <select class="selectpicker" aria-label="Default select example" name="services" required>
+                                                <select class="selectpicker" aria-label="Default select example"
+                                                    name="services" required>
                                                     <option selected disabled>Booking for?</option>
                                                     <option value="Counseling">Counseling</option>
-                                                    <option value="Mental Health First Aid">Mental Health First Aid</option>
+                                                    <option value="Mental Health First Aid">Mental Health First Aid
+                                                    </option>
                                                     <option value="General">General</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6">
                                             <div class="make-appointment__form-input-box">
-                                                <input type="text" placeholder="Select Date" name="date" id="datepicker" required>
+                                                <input type="text" placeholder="Select Date" name="date" id="datepicker"
+                                                    required>
                                                 <div class="contact-one__form-icon">
                                                     <i class="fas fa-calendar"></i>
                                                 </div>
@@ -998,10 +1002,17 @@
                                     <div class="row">
                                         <div class="col-xl-12">
                                             <div class="make-appointment__form-input-box text-message-box">
-                                                <textarea name="message" placeholder="Write a Message" required></textarea>
+                                                <textarea name="message" placeholder="Write a Message"
+                                                    required></textarea>
                                             </div>
+                                            <div class="g-recaptcha"
+                                                data-sitekey="6LdGuWcqAAAAAGlZDRCcZnlOuHqNF8WON3nXdE8Y"
+                                                style="margin-bottom: 20px; margin-top: 10px;"></div>
+                                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
                                             <div class="make-appointment__form-btn-box">
-                                                <button type="submit" class="thm-btn make-appointment__form-btn">Book Appointment</button>
+                                                <button type="submit" class="thm-btn make-appointment__form-btn">Book
+                                                    Appointment</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1036,7 +1047,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!--Make Appointment End-->
 
         <!--CTA One Start-->
