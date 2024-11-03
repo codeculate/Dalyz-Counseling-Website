@@ -11734,8 +11734,17 @@ ul {
   margin-bottom: 20px;
 }
 
-.make-appointment__form-input-box input[type=text],
-.make-appointment__form-input-box input[type=email] {
+.iti {
+  width: 100%;
+}
+
+.iti input[type="tel"] {
+  width: 100%; /* Ensure the phone input itself is also set to 100% */
+}
+
+.make-appointment__form-input-box input[type="text"],
+.make-appointment__form-input-box input[type="tel"],
+.make-appointment__form-input-box input[type="email"] {
   height: 60px;
   width: 100%;
   border: none;
